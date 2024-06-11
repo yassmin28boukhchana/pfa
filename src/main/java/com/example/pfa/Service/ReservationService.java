@@ -8,11 +8,11 @@ import com.example.pfa.Entities.Reservation;
 import java.util.List;
 
 public interface ReservationService {
+    void createReservation(RequestReservation requestReservation);
     List<ResponseReservation> getAllReservations();
     ResponseReservation getReservationById(Long id);
-    void createReservation(RequestReservation requestReservation);
-    Reservation updateReservation(Long id, UpdateReservationRequest requestReservation);
-    Boolean cancelReservation(Long id);
-    public Boolean confirmReservation(Long id) ;
-    List<ResponseReservation> getReservationByUserId(Long userId);
+    boolean deleteReservation(Long id);
+    Reservation updateReservation(Long id, RequestReservation requestReservation);
+    void approveReservation(Long id);
+    void rejectReservation(Long id);
 }

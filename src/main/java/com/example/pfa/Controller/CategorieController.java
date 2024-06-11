@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -32,15 +33,18 @@ public class CategorieController {
         return ResponseEntity.ok(categorieService.getAllCategories());
     }
 
+    @PreAuthorize("hasRole('Admin')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteCategorie(@PathVariable Long id) {
         boolean deletedCategory = categorieService.deleteCategorie(id);
         if (deletedCategory) {
-            return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("message", " delete success !!!"));
-        } else
+            return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("message", "Delete success !!!"));
+        } else {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.singletonMap("message", "Category does not exist"));
+        }
     }
 
+    @PreAuthorize("hasRole('Admin')")
     @PostMapping
     public ResponseEntity<Object> addCategory(@RequestBody @Valid RequestCategorie requestCategorie) {
         try {
@@ -55,16 +59,11 @@ public class CategorieController {
         }
     }
 
+    @PreAuthorize("hasRole('Admin')")
     @PutMapping(value = "{id}")
     public ResponseEntity<Object> updateCategorie(@PathVariable(name = "id") Long id, @RequestBody @Valid RequestCategorie requestCategorie) {
         categorieService.updateCategorie(id, requestCategorie);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(Collections.singletonMap("message", "update success !!!"));
-    }
-
-    @GetMapping("/sous-categories/{parentId}")
-    public ResponseEntity<List<ResponseCategorie>> getSousCategories(@PathVariable Long parentId) {
-        List<ResponseCategorie> sousCategories = categorieService.getSousCategories(parentId);
-        return ResponseEntity.ok(sousCategories);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(Collections.singletonMap("message", "Update success !!!"));
     }
 
 }

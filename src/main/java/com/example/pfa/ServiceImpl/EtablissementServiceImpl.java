@@ -2,9 +2,11 @@ package com.example.pfa.ServiceImpl;
 
 import com.example.pfa.Dto.RequestEtablissement;
 import com.example.pfa.Dto.ResponseEtablissement;
+import com.example.pfa.Entities.Departement;
 import com.example.pfa.Entities.Etablissement;
 import com.example.pfa.Repository.EtablissementRepository;
 import com.example.pfa.Service.EtablissementService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,6 +69,13 @@ public class EtablissementServiceImpl implements EtablissementService {
             etablissement.setStatus(requestEtablissement.getStatus());
         }
         return etablissementRepository.save(etablissement);
+    }
+
+    @Override
+    public List<Departement> getDepartementsByEtablissementId(Long etablissementId) {
+        Etablissement etablissement = etablissementRepository.findById(etablissementId)
+                .orElseThrow(() -> new EntityNotFoundException("Etablissement not found with id " + etablissementId));
+        return new ArrayList<>(etablissement.getDepartements());
     }
 
 

@@ -23,19 +23,20 @@ public class ResponseBien {
     private Instant updatedAt;
     private String nomCategorie; // Nom de la catégorie associée pour la réponse
     private String nomDepartement; // Nom du département associé pour la réponse
+    private boolean autorisation; // Ajout de l'attribut
 
-
- public static ResponseBien makeBien(Bien bien){
-     return ResponseBien.builder()
-             .nom(bien.getNom())
-             .id(bien.getId_bien())
-             .capacite(bien.getCapacite())
-             .status(bien.getStatus())
-             .createdAt(bien.getCreatedAt())
-             .updatedAt(bien.getUpdatedAt())
-             .description(bien.getDescription())
-             .nomCategorie(bien.getCategorie().getNom())
-             .nomDepartement(bien.getDepartement().getName())
-             .build();
- }
+    public static ResponseBien makeBien(Bien bien) {
+        return ResponseBien.builder()
+                .nom(bien.getNom())
+                .id(bien.getId_bien())
+                .capacite(bien.getCapacite())
+                .status(bien.getStatus())
+                .createdAt(bien.getCreatedAt())
+                .updatedAt(bien.getUpdatedAt())
+                .description(bien.getDescription())
+                .nomCategorie(bien.getCategorie().getNom())
+                .nomDepartement(bien.getDepartement().getName())
+                .autorisation(bien.getAutorisation()) // Ajout de l'attribut
+                .build();
+    }
 }

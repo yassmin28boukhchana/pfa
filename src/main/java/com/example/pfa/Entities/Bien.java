@@ -21,11 +21,11 @@ public class Bien {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id_bien;
-
     private String nom;
     private String description;
     private Integer capacite;
     private BienStatus status;
+    private Boolean autorisation;
     @CreationTimestamp
     private Instant createdAt ;
     @UpdateTimestamp

@@ -22,27 +22,25 @@ import static org.springframework.http.ResponseEntity.status;
 public class ResponseReservation {
 
 
-     Long id;
-     Date dateDebut;
-     Date dateFin;
-     ReservationStatus status;
-     Instant createdAt;
-     Instant updatedAt;
-     ReservedByUserResponse user ;
+    Long id;
+    Date dateDebut;
+    Date dateFin;
+    ReservationStatus status;
+    Instant createdAt;
+    Instant updatedAt;
+    ReservedByUserResponse user;
     private List<ReservedBienResponse> biens;
-
 
     public static ResponseReservation makeReservationResponse(Reservation reservation) {
         ReservedByUserResponse userResponse = ReservedByUserResponse.makeReservedByUser(reservation.getUser());
-
         List<ReservedBienResponse> biensResponse = reservation.getLigneReservations().stream()
                 .map(ligne -> ReservedBienResponse.makeReservedBien(ligne.getBien()))
                 .collect(Collectors.toList());
 
         return ResponseReservation.builder()
                 .id(reservation.getId())
-                .dateDebut(reservation.getDate_Debut())
-                .dateFin(reservation.getDate_Fin())
+                .dateDebut(reservation.getDateDebut())
+                .dateFin(reservation.getDateFin())
                 .status(reservation.getStatus())
                 .createdAt(reservation.getCreatedAt())
                 .updatedAt(reservation.getUpdatedAt())

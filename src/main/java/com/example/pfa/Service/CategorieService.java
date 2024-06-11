@@ -6,19 +6,15 @@ import com.example.pfa.Entities.Categorie;
 
 import java.util.List;
 
-    public interface CategorieService {
+public interface CategorieService {
 
-        void createCategorie(RequestCategorie requestCategorie);
+    void createCategorie(RequestCategorie requestCategorie);
 
-        ResponseCategorie getCategorieById(Long id);
+    ResponseCategorie getCategorieById(Long id);
 
-        List<ResponseCategorie> getAllCategories();
+    List<ResponseCategorie> getAllCategories();
 
-        Categorie updateCategorie(Long id, RequestCategorie requestCategorie);
+    Categorie updateCategorie(Long id, RequestCategorie requestCategorie);
 
-        boolean deleteCategorie(Long id);
-
-        List<ResponseCategorie> getSousCategories(Long parentId);
-
-
+    boolean deleteCategorie(Long id);
 }

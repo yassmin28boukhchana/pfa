@@ -14,26 +14,30 @@ import java.util.Set;
 @Setter
 @Getter
 @ToString
-@Builder  /* generation de constructeur par des parametres specefiques */
+@Builder
 @Entity
-@NoArgsConstructor /*  generation de constructeur avec parametres */
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="reservation")
-@AllArgsConstructor /* generation de constructeur parametre */
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @CreationTimestamp
-    private Instant createdAt;  // Instant type defini mte3 wakt l instant hedhi yaani
+    private Instant createdAt;
+
     @UpdateTimestamp
     private Instant updatedAt;
 
     @Temporal(TemporalType.DATE)
-    private Date date_Debut;
+    private Date dateDebut;
 
     @Temporal(TemporalType.DATE)
-    private Date date_Fin;
-    private ReservationStatus status ;
+    private Date dateFin;
+
+    @Enumerated(EnumType.STRING)
+    private ReservationStatus status;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -41,5 +45,4 @@ public class Reservation {
 
     @OneToMany(mappedBy = "reservation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LigneReservation> ligneReservations;
-
 }

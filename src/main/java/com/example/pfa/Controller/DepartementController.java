@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
@@ -22,17 +23,20 @@ public class DepartementController {
     //tab3a http requete
 
     @GetMapping
+    @PreAuthorize("hasAnyRole('Admin','USER')")
     public ResponseEntity<List<ResponseDepartement>> getAllDepartment(){
         List<ResponseDepartement> departements =departementService.getAllDepartement();
         return ResponseEntity.ok(departements);
     }
 
     @GetMapping("{id}")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<ResponseDepartement> getDepartementById(@PathVariable Long id){
         return ResponseEntity.ok(departementService.getDepartementById(id));
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<Object> addDepartement(@RequestBody @Valid RequestDepartement requestDepartement){
         // type  retour ResponseEntity bsh baad l front inajm yakraha
         departementService.CreateDepartement(requestDepartement);
@@ -41,6 +45,7 @@ public class DepartementController {
 
 
     @PutMapping(value = "{id}")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<Object> UpdateDepartement (@PathVariable(name = "id") Long id, @RequestBody @Valid RequestDepartement request)
     {
         departementService.UpdateDepartement(id, request);
@@ -48,6 +53,7 @@ public class DepartementController {
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('Admin')")
     public ResponseEntity<Object> DeleteDepartement (@PathVariable Long id ){
         boolean deletedDepartement = departementService.DeleteDepartement(id);
         if(deletedDepartement){

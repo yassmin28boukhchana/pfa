@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
         User user = User.builder()
                 .Nom(userRequest.getNom())
                 .Prenom(userRequest.getPrenom())
-                .Email(userRequest.getEmail())
+                .email(userRequest.getEmail())
                 .status(true)
                 .etablissement(etablissement)
                 .Telephone(userRequest.getTelephone())

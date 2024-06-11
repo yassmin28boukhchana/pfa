@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor /* generation de constructeur parametre */
 public class Etablissement {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id ;
     private String Nom ;
     private String Email ;

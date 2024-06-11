@@ -23,12 +23,14 @@ public class RequestBien {
     @Min(value = 1, message = "La capacité doit être supérieure à 0.")
     private Integer capacite;
 
-    @NotBlank(message = "Le statut ne peut pas être vide.")
+    @NotNull(message = "Le statut ne peut pas être vide.")
     private BienStatus status;
 
     @NotNull(message = "L'identifiant de la catégorie ne peut pas être null.")
     private Long categorieId;
 
     @NotNull(message = "L'identifiant du département ne peut pas être null.")
-    private Long departementId ;
+    private Long departementId;
+
+    private Boolean autorisation; // Ajout de l'attribut
 }
